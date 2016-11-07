@@ -1,0 +1,4 @@
+.DS_Store
+config/google-auth.json
+data/*
+env/

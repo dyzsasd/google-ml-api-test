@@ -1,5 +1,6 @@
 import argparse
 import base64
+import codecs
 from multiprocessing import Pool
 import time
 
@@ -78,7 +79,7 @@ class GoogleSpeechSyncClient(GoogleSpeechClientBase):
                     print(u'  ({}): {}'.format(
                         alternative.confidence, alternative.transcript))
         else:
-            with open(output_file, 'w') as output_handle:
+            with codecs.open(output_file, 'w', 'utf8') as output_handle:
                 for result in response.results:
                     for alternative in result.alternatives:
                         output_handle.write(u'  ({}): {}'.format(
@@ -132,7 +133,7 @@ class GoogleSpeechAsyncClient(GoogleSpeechClientBase):
                     print(u'  ({}): {}'.format(
                         alternative.confidence, alternative.transcript))
         else:
-            with open(output_file, 'w') as output_handle:
+            with codecs.open(output_file, 'w', 'utf8') as output_handle:
                 for result in response.results:
                     for alternative in result.alternatives:
                         output_handle.write(u'  ({}): {}'.format(

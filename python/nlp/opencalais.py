@@ -19,7 +19,13 @@ headers = {
 with codecs.open('tweet.json', 'r', 'utf8') as fh:
     tweets = json.load(fh)
 
-user_videos = get_user_videos_from_file("videos.json")
+# user_videos = get_user_videos_from_file("videos.json")
+user_videos_new = get_user_videos_from_file("selected_videos.json")
+user_videos = [
+    Video(it["id"]).meta for it in user_videos_new
+]
+
+
 opencalais_parser = OpenCalaisNlpDataset("")
 
 for user, videos in user_videos.items():

@@ -6,6 +6,7 @@ import requests
 
 from python.datasets.daily import get_user_videos_from_file
 from python.datasets.opencalais import OpenCalaisNlpDataset
+from python.models.daily import Video
 
 url = 'https://api.thomsonreuters.com/permid/calais'
 
@@ -16,15 +17,14 @@ headers = {
     'x-calais-language': 'English',
 }
 
-with codecs.open('tweet.json', 'r', 'utf8') as fh:
-    tweets = json.load(fh)
-
 # user_videos = get_user_videos_from_file("videos.json")
 user_videos_new = get_user_videos_from_file("selected_videos.json")
-user_videos = [
-    Video(it["id"]).meta for it in user_videos_new
-]
-
+user_videos = {'embed': []}
+for it in user_videos_new:
+    try:
+        user_videos['embed'].append(Video(str(it["video_id"])).meta)
+    except Exception:
+        continue
 
 opencalais_parser = OpenCalaisNlpDataset("")
 
@@ -58,5 +58,5 @@ for user, videos in user_videos.items():
         video['results'] = res
         video['parsed_results'] = parsed_res
 
-with codecs.open('dailymotion-opencalais.json', 'w', 'utf8') as fh:
+with codecs.open('dailymotion-embed-opencalais.json', 'w', 'utf8') as fh:
     json.dump(user_videos, fh, indent=2)

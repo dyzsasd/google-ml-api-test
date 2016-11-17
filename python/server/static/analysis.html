@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Analysis">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Analysis</title>
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap-social.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!--font awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Important Owl stylesheet -->
+    <link rel="stylesheet" href="/static/css/owl.carousel.css">
+    <!-- If you'd like to support IE8 -->
+    <!-- Default Theme -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="course-page">
+    <div class="loader">
+        <div class="cssload-loader">
+            <div class="cssload-inner cssload-one"></div>
+            <div class="cssload-inner cssload-two"></div>
+            <div class="cssload-inner cssload-three"></div>
+        </div>
+    </div>
+    <!--header start -->
+    <header>
+        <nav class="navbar " role="navigation">
+            <div class="container-fluid">
+                <h2 class="navbar-brand">Analysis</h2>
+            </div>
+        </nav>
+    </header>
+    <!--/header end -->
+
+    <section id="course-information-section" ng-controller="AnalysisCtrl">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3" id="video-list">
+            <table class="table table-striped">
+              <tr ng-repeat="video in videos">
+                <td><a ng-click="choose_video(video)">{{ video.title }}</a></td>
+                <td><a ng-href="http://www.dailymotion.fr/{{ video.id }}">{{ video.id }}</a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-sm-9" id="video-content">
+            <div class="col-sm-12">
+              <iframe frameborder="0" width="480"
+                      height="270" ng-src="{{ chosen_video_src }}" allowfullscreen></iframe>
+            </div>
+            <div class="col-sm-12">
+              <h3>{{ chosen_video.title }}</h3>
+            </div>
+            <div class="col-sm-12">
+              <div><h4>Description:</h4></div>
+              <p>{{ chosen_video.description }}</p>
+            </div>
+            <div class="col-sm-12">
+              <div><h4>Tags:</h4></div>
+              <span class="label label-info" ng-repeat="tag in chosen_video.tags">
+                {{ tag }}
+              </span>
+            </div>
+            <div class="col-sm-12">
+              <div class="col-sm-4">
+                <h4>Entities from title</h4>
+                <div ng-repeat="entity in chosen_video.parsed_results.title.entities">
+                  <span class="label label-default">
+                    {{ entity.topic_text }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <h4>Entities from description</h4>
+                <div ng-repeat="entity in chosen_video.parsed_results.description.entities">
+                  <span class="label label-info">
+                    {{ entity.topic_text }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <h4>Entities from tags</h4>
+                <div ng-repeat="entity in chosen_video.parsed_results.tags.entities">
+                  <span class="label label-warn">
+                    {{ entity.topic_text }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-cookies.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-sanitize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bower-angular-translate/2.0.1/angular-translate.min.js"></script>
+    <script src='https://connect.facebook.net/en_US/sdk.js' id="facebook-jssdk"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/js/ext/bootstrap.min.js"></script>
+    <script src="/static/js/ext/owl.carousel.min.js"></script>
+    <script src="/static/js/ext/angular-dialog-service-5.0.0.js"></script>
+    <script src="/static/js/ext/angularjs-toaster-0.4.4.js"></script>
+    <script src="/static/js/ext/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="/static/js/analysis.js"></script>
+
+</body>
+
+</html>

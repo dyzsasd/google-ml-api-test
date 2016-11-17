@@ -5,8 +5,8 @@ import re
 
 root='/Users/s.zhang/workspace/dailymotion/google-ml-api'
 
-recognition_results_path = "%s/data/benchmark/de-DE/text/" % root
-reference_path = "%s/data/benchmark/de-DE/transcript/" % root
+recognition_results_path = "%s/data/benchmark/fr-FR/text/" % root
+reference_path = "%s/data/benchmark/fr-FR/transcript/" % root
 
 results={}
 
